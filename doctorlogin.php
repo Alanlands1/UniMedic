@@ -88,7 +88,7 @@
 		    					<input type="text" class="form-control" name="specialization"  placeholder="Specialization">
 		    				</div>
 	    					<div class="form-group">
-		    					<input type="text" class="form-control" name="regpassword" placeholder="Password">
+		    					<input type="password" class="form-control" name="regpassword" placeholder="Password">
 		    				</div>
 	    				</div>
 	    				<div class="d-md-flex">
@@ -238,6 +238,7 @@ if (isset($_POST['register'])) {
     $name= validate($_POST['regname']);
     $password=md5($_POST['regpassword']);
     $hospitalid=validatenumber($_POST['reghospitalid']);
+    $specialization=validate($_POST['specialization']);
     $query = "SELECT * FROM doctor WHERE name = '$name' AND hospitalid= $hospitalid";
     $retval=mysqli_query($connect,$query);
     $row = mysqli_fetch_assoc($retval);
@@ -247,7 +248,7 @@ if (isset($_POST['register'])) {
       $row = mysqli_fetch_assoc($retval);
       echo "<script>alert('$hospitalid');</script>";
       if ($row['id']!="") {
-        $query = "INSERT into doctor(name,password,hospitalid) values('$name','$password',$hospitalid)";
+        $query = "INSERT into doctor(name,password,hospitalid,specialization) values('$name','$password',$hospitalid,'$specialization')";
         $retval=mysqli_query($connect,$query);
         echo "<script>alert('Registered');</script>";
       }
@@ -272,7 +273,8 @@ if (isset($_POST['login'])) {
     $retval=mysqli_query($connect,$query);
     $row = mysqli_fetch_assoc($retval);
     if($row['password'] == $password){
-
+      $_SESSION['id'] = $row['docid'];
+      header('location:doctorPortalView.php');
     }else {
       echo "<script>alert('Wrong Username or Password')</script>";
     }
