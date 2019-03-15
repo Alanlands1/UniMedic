@@ -81,26 +81,26 @@
 	          <form action="hospitallogin.php" method="post" enctype="multipart/form-data" class="appointment-form ftco-animate">
 	    				<div >
 		    				<div class="form-group">
-		    					<input type="text" class="form-control" placeholder="Hospital Name">
+		    					<input type="text" class="form-control" name="reghospital" placeholder="Hospital Name">
 		    				</div>
 		    				<div class="form-group">
-		    					<input type="text" class="form-control" placeholder="City">
+		    					<input type="text" class="form-control" placeholder="City" name="regcity">
 		    				</div>
 	    				</div>
 	    				<div class="d-md-flex">
 	    					<div class="form-group">
-		    					<input type="text" class="form-control" name="" value="" placeholder="State">
+		    					<input type="text" class="form-control" name="regstate" value="" placeholder="State">
 		    				</div>
 	    					<div class="form-group ml-md-4">
-		    					<input type="text" class="form-control" placeholder="Phone">
-		    				</div>
-                <div class="form-group ml-md-4">
-		    					<input type="password" class="form-control" placeholder="Password">
+		    					<input type="text" class="form-control" name="regphone" placeholder="Phone">
 		    				</div>
 	    				</div>
+              <div class="form-group">
+                <input type="password" class="form-control" name="regpassword" placeholder="Password">
+              </div>
 	    				<div class="d-md-flex">
 		            <div class="form-group ml-md-4">
-		              <input type="submit" value="Register" class="btn btn-secondary py-3 px-4">
+		              <input type="submit" value="Register" name="register" class="btn btn-secondary py-3 px-4">
 		            </div>
 	    				</div>
 	    			</form>
@@ -108,68 +108,25 @@
           <div class="col-md-6 py-5 pr-md-5">
 	          <div class="heading-section heading-section-white ftco-animate mb-5">
 	          	<span class="subheading">Login</span>
-	            <h2 class="mb-4">Log in</h2>
+	            <h2 class="mb-4">Login to Hospital</h2>
 	            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
 	          </div>
-	          <form action="#" class="appointment-form ftco-animate">
+	          <form action="hospitallogin.php" method="post" enctype="multipart/form-data" class="appointment-form ftco-animate">
 	    				<div>
 		    				<div class="form-group">
-		    					<input type="text" class="form-control" placeholder="Hospital Name/Hospital ID">
+		    					<input type="text" class="form-control" name="hospital" placeholder="Hospital Name/Hospital ID">
 		    				</div>
 		    				<div class="form-group">
-		    					<input type="password" class="form-control" placeholder="Password">
+		    					<input type="password" class="form-control" name="password" placeholder="Password">
 		    				</div>
 	    				</div>
 		            <div class="form-group ml-md-12 centered" style="width:30%;">
-		              <input type="submit" value="Login" class="btn btn-secondary py-3 px-9 btn-login">
+		              <input type="submit" name="login" value="Login" class="btn btn-secondary py-3 px-9 btn-login">
 		            </div>
 	    				</div>
 	    			</form>
     			</div>
         </div>
-        <div class="container back_white">
-        <div class="row">
-          <div class="col-lg-3"></div>
-        <div class="col-lg-6 p-5 bg-counter aside-stretch ">
-          <h3 class="vr">About UniMedic </h3>
-          <div class="row pt-4 mt-1">
-            <div class="col-md-6 d-flex justify-content-center counter-wrap ftco-animate">
-              <div class="block-18 p-5 bg-light">
-                <div class="text">
-                  <strong class="number" data-number="30">0</strong>
-                  <span>Years of Experienced</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 d-flex justify-content-center counter-wrap ftco-animate">
-              <div class="block-18 p-5 bg-light">
-                <div class="text">
-                  <strong class="number" data-number="4500">0</strong>
-                  <span>Happy Patients</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 d-flex justify-content-center counter-wrap ftco-animate">
-              <div class="block-18 p-5 bg-light">
-                <div class="text">
-                  <strong class="number" data-number="84">0</strong>
-                  <span>Number of Doctors</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 d-flex justify-content-center counter-wrap ftco-animate">
-              <div class="block-18 p-5 bg-light">
-                <div class="text">
-                  <strong class="number" data-number="300">0</strong>
-                  <span>Number of Staffs</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 back_white"></div>
-        </div>
-      </div>
     	</div>
     </section>
 
@@ -229,3 +186,51 @@
 
   </body>
 </html>
+<?php
+require('connect.php');
+if (isset($_POST['register'])) {
+    function validatenumber($string) {
+       return preg_replace('/[^0-9]/', '', $string);
+    }
+
+    function validate($string) {
+       return preg_replace('/[^A-Z@ a-z0-9+\- .]/', '', $string);
+    }
+    $name= validate($_POST['reghospital']);
+    $password=md5($_POST['regpassword']);
+    $regcity=validate($_POST['regcity']);
+    $regstate=validate($_POST['regstate']);
+    $regnumber=validatenumber($_POST['regphone']);
+    $query = "SELECT * FROM hospital WHERE name = '$name'";
+    $retval=mysqli_query($connect,$query);
+    $row = mysqli_fetch_assoc($retval);
+    if ($row['id']=="") {
+        $query = "INSERT into hospital(name,password,city,state,phone) values('$name','$password','$regcity','$regstate','$regnumber')";
+        $retval=mysqli_query($connect,$query);
+        echo "<script>alert('Hospital Registered');</script>";
+    }
+    else {
+      echo "<script>alert('Already Registered Hospital');</script>";
+    }
+  }
+if (isset($_POST['login'])) {
+
+    function validatenumber($string) {
+       return preg_replace('/[^0-9]/', '', $string);
+    }
+
+    function validate($string) {
+       return preg_replace('/[^A-Z@ a-z0-9\- .]/', '', $string);
+    }
+    $name= validate($_POST['hospital']);
+    $password= md5($_POST['password']);
+    $query = "SELECT * FROM hospital WHERE name = '$name'";
+    $retval=mysqli_query($connect,$query);
+    $row = mysqli_fetch_assoc($retval);
+    if($row['password'] == $password){
+      echo "<script>alert('Logined')</script>";
+    }else {
+      echo "<script>alert('Wrong Username or Password')</script>";
+    }
+  }
+ ?>
