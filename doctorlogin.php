@@ -45,11 +45,8 @@
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav mr-auto">
             <li class="nav-item active navEffects"><a href="index.html" class="nav-link pl-0">Home</a></li>
-	        	<li class="nav-item navEffects"><a href="doctorlogin.html" class="nav-link">Doctor Portal</a></li>
-	        	<li class="nav-item navEffects"><a href="patientlogin.html" class="nav-link">Patient Portal</a></li>
-	        	<li class="nav-item navEffects"><a href="hospitallogin.html" class="nav-link">Hospital Portal</a></li>
-	        	<li class="nav-item navEffects"><a href="pricing.html" class="nav-link">Lab Portal</a></li>
-	        	<li class="nav-item navEffects"><a href="blog.html" class="nav-link">Register</a></li>
+	        	<li class="nav-item navEffects"><a href="doctorlogin.php" class="nav-link">Doctor Portal</a></li>
+	        	<li class="nav-item navEffects"><a href="hospitallogin.php" class="nav-link">Hospital Portal</a></li>
 	          <li class="nav-item navEffects"><a href="About.html" class="nav-link">About</a></li>
 	        </ul>
 	      </div>
@@ -85,7 +82,10 @@
 	    				</div>
 	    				<div>
                 <div class="form-group">
-		    					<input type="number" class="form-control" name="reghospitalid" value="" placeholder="Working Hospital ID">
+		    					<input type="number" class="form-control" name="reghospitalid" placeholder="Working Hospital ID">
+		    				</div>
+                <div class="form-group">
+		    					<input type="text" class="form-control" name="specialization"  placeholder="Specialization">
 		    				</div>
 	    					<div class="form-group">
 		    					<input type="text" class="form-control" name="regpassword" placeholder="Password">

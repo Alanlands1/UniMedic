@@ -42,15 +42,11 @@
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
-	      <p class="button-custom order-lg-last mb-0"><a href="appointment.html" class="btn btn-secondary py-2 px-3">Make An Appointment</a></p>
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav mr-auto">
             <li class="nav-item active navEffects"><a href="index.html" class="nav-link pl-0">Home</a></li>
-	        	<li class="nav-item navEffects"><a href="doctorlogin.html" class="nav-link">Doctor Portal</a></li>
-	        	<li class="nav-item navEffects"><a href="patientlogin.html" class="nav-link">Patient Portal</a></li>
-	        	<li class="nav-item navEffects"><a href="hospitallogin.html" class="nav-link">Hospital Portal</a></li>
-	        	<li class="nav-item navEffects"><a href="pricing.html" class="nav-link">Lab Portal</a></li>
-	        	<li class="nav-item navEffects"><a href="blog.html" class="nav-link">Register</a></li>
+	        	<li class="nav-item navEffects"><a href="doctorlogin.php" class="nav-link">Doctor Portal</a></li>
+	        	<li class="nav-item navEffects"><a href="hospitallogin.php" class="nav-link">Hospital Portal</a></li>
 	          <li class="nav-item navEffects"><a href="About.html" class="nav-link">About</a></li>
 	        </ul>
 	      </div>
@@ -187,6 +183,7 @@
   </body>
 </html>
 <?php
+session_start();
 require('connect.php');
 if (isset($_POST['register'])) {
     function validatenumber($string) {
@@ -229,6 +226,9 @@ if (isset($_POST['login'])) {
     $row = mysqli_fetch_assoc($retval);
     if($row['password'] == $password){
       echo "<script>alert('Logined')</script>";
+      $id=$row['id'];
+      $_SESSION['id']=$id;
+      header('location:hospitalPortalView.php');
     }else {
       echo "<script>alert('Wrong Username or Password')</script>";
     }

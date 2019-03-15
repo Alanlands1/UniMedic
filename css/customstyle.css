@@ -9,13 +9,81 @@ Custom Styles
 {
  color: white !important;
 }
-.back_white
+.back-white
 {
   background-color: white; !important
+    min-height: 100vh;
 }
 .btn-login:hover
 {
   background-color: #2f89fc;
   border-color: #2f89fc;
+}
+.transBack
+{
+    background-color: rgba(0, 0, 0, 0.1);
+    margin: 5px;
+    border-radius: 15px;
+}
+.backblue
+{
+    min-height: 100vh;
+    background-color: #2f89fc;
+}
+.btn_style1
+{
+  background-color: #2f89fc !important;
+  color: white !important;
+  font-style: bold !important;
+  border-radius: 50px;
+}
+.btn_style1:hover
+{
+  background-color: #dd6436 !important;
+  color: white !important;
+  font-style: bold !important;
+}
+.box_style1:focus
+{
+  border-radius: 50px;
+  border-width: 3px;
+  border-color: #2f89fc !important;
+  transition-timing-function: ease-in;
+  transition: all 0.5s ;
+}
+.h3
+{
+
+}
+.cusTable
+{
+  width: 100%;
+  text-align: center;
+
+}
+.cusTable td
+{
+  padding-top:8px;
+  padding-bottom: 8px;
+}
+.cusTable th
+{
+  background-color: #2f89fc;
+  color: white;
+  padding-top:8px;
+  padding-bottom: 8px;
+}
+.cusTable tr:nth-child(even)
+{
+  background-color: #ededed;
+  color: black;
+
+}
+
+.cusTable tr:nth-child(odd)
+{
+  background-color: #dedede;
+  color: black;
+
 }
 /* End Custom Styles*/
