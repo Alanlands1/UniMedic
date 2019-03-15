@@ -78,7 +78,7 @@
 	            <h2 class="mb-4">Register your Hospital</h2>
 	            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
 	          </div>
-	          <form action="hospitallogin.php" class="appointment-form ftco-animate">
+	          <form action="hospitallogin.php" method="post" enctype="multipart/form-data" class="appointment-form ftco-animate">
 	    				<div >
 		    				<div class="form-group">
 		    					<input type="text" class="form-control" placeholder="Hospital Name">
@@ -94,10 +94,13 @@
 	    					<div class="form-group ml-md-4">
 		    					<input type="text" class="form-control" placeholder="Phone">
 		    				</div>
+                <div class="form-group ml-md-4">
+		    					<input type="password" class="form-control" placeholder="Password">
+		    				</div>
 	    				</div>
 	    				<div class="d-md-flex">
 		            <div class="form-group ml-md-4">
-		              <input type="submit" value="Appointment" class="btn btn-secondary py-3 px-4">
+		              <input type="submit" value="Register" class="btn btn-secondary py-3 px-4">
 		            </div>
 	    				</div>
 	    			</form>
@@ -105,13 +108,13 @@
           <div class="col-md-6 py-5 pr-md-5">
 	          <div class="heading-section heading-section-white ftco-animate mb-5">
 	          	<span class="subheading">Login</span>
-	            <h2 class="mb-4">Log in with your Credentials</h2>
+	            <h2 class="mb-4">Log in</h2>
 	            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
 	          </div>
 	          <form action="#" class="appointment-form ftco-animate">
 	    				<div>
 		    				<div class="form-group">
-		    					<input type="text" class="form-control" placeholder="Username">
+		    					<input type="text" class="form-control" placeholder="Hospital Name/Hospital ID">
 		    				</div>
 		    				<div class="form-group">
 		    					<input type="password" class="form-control" placeholder="Password">
