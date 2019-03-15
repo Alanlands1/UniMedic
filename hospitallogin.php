@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>UniMedic</title>
+    <title>Dr.care - Free Bootstrap 4 Template by Colorlib</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -62,8 +62,8 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
-            <h1 class="mb-2 bread">Patient Portal Login or Register</h1>
-            <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Appointment <i class="ion-ios-arrow-forward"></i></span></p>
+            <h1 class="mb-2 bread">Login</h1>
+            <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Login <i class="ion-ios-arrow-forward"></i></span></p>
           </div>
         </div>
       </div>
@@ -75,13 +75,13 @@
     			<div class="col-md-6 py-5 pr-md-5">
 	          <div class="heading-section heading-section-white ftco-animate mb-5">
 	          	<span class="subheading">Register</span>
-	            <h2 class="mb-4">Register yourself</h2>
+	            <h2 class="mb-4">Register your Hospital</h2>
 	            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
 	          </div>
-	          <form action="#" class="appointment-form ftco-animate">
+	          <form action="hospitallogin.php" class="appointment-form ftco-animate">
 	    				<div >
 		    				<div class="form-group">
-		    					<input type="text" class="form-control" placeholder="Patient Name">
+		    					<input type="text" class="form-control" placeholder="Hospital Name">
 		    				</div>
 		    				<div class="form-group">
 		    					<input type="text" class="form-control" placeholder="City">
@@ -89,19 +89,15 @@
 	    				</div>
 	    				<div class="d-md-flex">
 	    					<div class="form-group">
-		    					<input type="text" class="form-control" name="" value="" placeholder="Blood Group">
+		    					<input type="text" class="form-control" name="" value="" placeholder="State">
 		    				</div>
 	    					<div class="form-group ml-md-4">
 		    					<input type="text" class="form-control" placeholder="Phone">
 		    				</div>
 	    				</div>
-              <div class="form-group">
-                <input type="text" class="form-control" name="" value="" placeholder="DOB">
-                <input type="text" class="form-control" name="" value="" placeholder="Gender">
-              </div>
 	    				<div class="d-md-flex">
 		            <div class="form-group ml-md-4">
-		              <input type="submit" value="Register" class="btn btn-secondary py-3 px-4">
+		              <input type="submit" value="Appointment" class="btn btn-secondary py-3 px-4">
 		            </div>
 	    				</div>
 	    			</form>
@@ -128,8 +124,7 @@
 	    			</form>
     			</div>
         </div>
-
-        <section class="container back_white">
+        <div class="container back_white">
         <div class="row">
           <div class="col-lg-3"></div>
         <div class="col-lg-6 p-5 bg-counter aside-stretch ">
