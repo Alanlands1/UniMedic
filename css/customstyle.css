@@ -1,0 +1,21 @@
+/*
+Custom Styles
+*/
+.navEffects:hover
+{
+  background-color: #2f89fc;
+}
+.navEffects:hover a
+{
+ color: white !important;
+}
+.back_white
+{
+  background-color: white; !important
+}
+.btn-login:hover
+{
+  background-color: #2f89fc;
+  border-color: #2f89fc;
+}
+/* End Custom Styles*/
