@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -246,15 +247,17 @@ if (isset($_POST['register'])) {
       $query = "SELECT * FROM hospital WHERE id=$hospitalid";
       $retval=mysqli_query($connect,$query);
       $row = mysqli_fetch_assoc($retval);
-      echo "<script>alert('$hospitalid');</script>";
       if ($row['id']!="") {
-        $query = "INSERT into doctor(name,password,hospitalid,specialization) values('$name','$password',$hospitalid,'$specialization')";
+        $query = "INSERT into doctor(docname,password,hospitalid,specialization) values('$name','$password',$hospitalid,'$specialization')";
         $retval=mysqli_query($connect,$query);
         echo "<script>alert('Registered');</script>";
       }
       else {
         echo "<script>alert('Not Registered Hospital');</script>";
       }
+    }
+    else {
+      echo "<script>alert('Not Registered');</script>";
     }
   }
 if (isset($_POST['login'])) {
@@ -269,12 +272,12 @@ if (isset($_POST['login'])) {
     $name= validate($_POST['name']);
     $password= md5($_POST['password']);
     $hospitalid=validatenumber($_POST['hospitalid']);
-    $query = "SELECT * FROM doctor WHERE name = '$name' AND hospitalid= $hospitalid";
+    $query = "SELECT * FROM doctor WHERE docname = '$name' AND hospitalid= $hospitalid";
     $retval=mysqli_query($connect,$query);
     $row = mysqli_fetch_assoc($retval);
     if($row['password'] == $password){
-      $_SESSION['id'] = $row['docid'];
-      header('location:doctorPortalView.php');
+      $_SESSION['docid'] = $row['id'];
+      header('location:doctorPortalView.php?portalFn=1');
     }else {
       echo "<script>alert('Wrong Username or Password')</script>";
     }

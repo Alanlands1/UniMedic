@@ -1,7 +1,7 @@
 <?php
 session_start();
 require('connect.php');
-if ($_SESSION['id']=="") {
+if ($_SESSION['hosid']=="") {
   header('location:hospitallogin.php');
 }
  ?>
@@ -99,7 +99,7 @@ if ($_SESSION['id']=="") {
             function validate($string) {
                return preg_replace('/[^A-Z@ a-z0-9+\- .]/', '', $string);
             }
-            $hospitalid = $_SESSION['id'];
+            $hospitalid = $_SESSION['hosid'];
             $patientId = validatenumber($_POST['patientId1']);
             $query = "SELECT * FROM profile WHERE id = $patientId";
             $retval=mysqli_query($connect,$query);
@@ -159,7 +159,7 @@ if ($_SESSION['id']=="") {
               function validate($string) {
                  return preg_replace('/[^A-Z@ a-z0-9+\- .]/', '', $string);
               }
-              $hospitalid = $_SESSION['id'];
+              $hospitalid = $_SESSION['hosid'];
               $patientId = validatenumber($_POST['patientId']);
               $doctorId = validatenumber($_POST['doctorId']);
               $timeSch = validate($_POST['timeSch']);
@@ -202,14 +202,14 @@ if ($_SESSION['id']=="") {
                 <th>Specialization</th>
               </tr>
               <?php
-              $id =$_SESSION['id'];
+              $id =$_SESSION['hosid'];
                 $query = "SELECT * FROM doctor WHERE hospitalid = $id";
                 $retval=mysqli_query($connect,$query);
                 while ($row = mysqli_fetch_assoc($retval)) {
                   ?>
                   <tr>
                     <td><?php echo $row['id'];?> </td>
-                    <td><?php echo $row['name'];?></td>
+                    <td><?php echo $row['docname'];?></td>
                     <td><?php echo $row['specialization'];?></td>
                   </tr><?php
                 }
@@ -264,14 +264,14 @@ if ($_SESSION['id']=="") {
                         <th>Specialization</th>
                       </tr>
                       <?php
-                      $id =$_SESSION['id'];
+                      $id =$_SESSION['hosid'];
                         $query = "SELECT * FROM doctor WHERE hospitalid = $id";
                         $retval=mysqli_query($connect,$query);
                         while ($row = mysqli_fetch_assoc($retval)) {
                           ?>
                           <tr>
                             <td><?php echo $row['id'];?> </td>
-                            <td><?php echo $row['name'];?></td>
+                            <td><?php echo $row['docname'];?></td>
                             <td><?php echo $row['specialization'];?></td>
                           </tr><?php
                         }

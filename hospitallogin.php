@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Dr.care - Free Bootstrap 4 Template by Colorlib</title>
+    <title>UniMedic</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -227,7 +227,7 @@ if (isset($_POST['login'])) {
     if($row['password'] == $password){
       echo "<script>alert('Logined')</script>";
       $id=$row['id'];
-      $_SESSION['id']=$id;
+      $_SESSION['hosid']=$id;
       header('location:hospitalPortalView.php');
     }else {
       echo "<script>alert('Wrong Username or Password')</script>";
