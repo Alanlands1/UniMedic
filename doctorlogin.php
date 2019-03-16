@@ -1,5 +1,58 @@
-<?php session_start(); ?>
-<!DOCTYPE html>
+<?php
+session_start();
+include('connect.php');  if (isset($_POST['register'])) {
+      function validatenumber($string) {
+         return preg_replace('/[^0-9]/', '', $string);
+      }
+
+      function validate($string) {
+         return preg_replace('/[^A-Z@ a-z0-9+\- .]/', '', $string);
+      }
+      $name= validate($_POST['regname']);
+      $password=md5($_POST['regpassword']);
+      $hospitalid=validatenumber($_POST['reghospitalid']);
+      $specialization=validate($_POST['specialization']);
+      $query = "SELECT * FROM doctor WHERE docname = '$name' AND hospitalid= $hospitalid";
+      $retval=mysqli_query($connect,$query);
+      $row = mysqli_fetch_assoc($retval);
+      if ($row['id']=="") {
+        $query = "SELECT * FROM hospital WHERE id=$hospitalid";
+        $retval=mysqli_query($connect,$query);
+        $row = mysqli_fetch_assoc($retval);
+        if ($row['id']!="") {
+          $query = "INSERT into doctor(docname,password,hospitalid,specialization) values('$name','$password',$hospitalid,'$specialization')";
+          $retval=mysqli_query($connect,$query);
+          echo "<script>alert('Registered');</script>";
+        }
+        else {
+          echo "<script>alert('Not Registered Hospital');</script>";
+        }
+      }
+    }
+  if (isset($_POST['login'])) {
+
+      function validatenumber($string) {
+         return preg_replace('/[^0-9]/', '', $string);
+      }
+
+      function validate($string) {
+         return preg_replace('/[^A-Z@ a-z0-9\- .]/', '', $string);
+      }
+      $name= validate($_POST['name']);
+      $password= md5($_POST['password']);
+      $hospitalid=validatenumber($_POST['hospitalid']);
+      $query = "SELECT * FROM doctor WHERE docname = '$name' AND hospitalid= $hospitalid";
+      $retval=mysqli_query($connect,$query);
+      $row = mysqli_fetch_assoc($retval);
+      if($row['password'] == $password){
+        $_SESSION['docid'] = $row['id'];
+        $_SESSION['hosId'] = $hospitalid;
+        header("location:doctorPortalView.php?portalFn=1");
+      }else {
+        echo "<script>alert('Wrong Username or Password')</script>";
+      }
+    }
+   ?>
 <html lang="en">
   <head>
     <title>UniMedic</title>
@@ -32,8 +85,8 @@
     <nav class="navbar py-4 navbar-expand-lg ftco_navbar navbar-light bg-light flex-row">
     	<div class="container">
     		<div class="row no-gutters d-flex align-items-start align-items-center px-3 px-md-0">
-          <div class="col-lg-2 pr-4 align-items-center">
-		    		<a class="navbar-brand" href="index.html"><img src="images/logo.png" class="navlogo">&nbsp Uni<span>Medic</span></a>
+    			<div class="col-lg-2 pr-4 align-items-center">
+		    		<a class="navbar-brand" href="index.html">Uni<span>Medic</span></a>
 	    		</div>
 		    </div>
 		  </div>
@@ -44,11 +97,10 @@
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
 	      <div class="collapse navbar-collapse" id="ftco-nav">
-          <ul class="navbar-nav mr-auto">
-	        	<li class="nav-item active navEffects"><a href="index.html" class="nav-link pl-0">Home</a></li>
+	        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active navEffects"><a href="index.html" class="nav-link pl-0">Home</a></li>
 	        	<li class="nav-item navEffects"><a href="doctorlogin.php" class="nav-link">Doctor Portal</a></li>
 	        	<li class="nav-item navEffects"><a href="hospitallogin.php" class="nav-link">Hospital Portal</a></li>
-	        	<li class="nav-item navEffects"><a href="labPortal.php" class="nav-link">Lab Portal</a></li>
 	          <li class="nav-item navEffects"><a href="About.html" class="nav-link">About</a></li>
 	        </ul>
 	      </div>
@@ -222,65 +274,8 @@
   <script src="js/scrollax.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="js/google-map.js"></script>
-  <script src="js/main.js"></script>ipt>
+  <script src="js/main.js"></script>
   <script src="js/main.js"></script>
 
   </body>
 </html>
-<?php
-require('connect.php');
-if (isset($_POST['register'])) {
-    function validatenumber($string) {
-       return preg_replace('/[^0-9]/', '', $string);
-    }
-
-    function validate($string) {
-       return preg_replace('/[^A-Z@ a-z0-9+\- .]/', '', $string);
-    }
-    $name= validate($_POST['regname']);
-    $password=md5($_POST['regpassword']);
-    $hospitalid=validatenumber($_POST['reghospitalid']);
-    $specialization=validate($_POST['specialization']);
-    $query = "SELECT * FROM doctor WHERE name = '$name' AND hospitalid= $hospitalid";
-    $retval=mysqli_query($connect,$query);
-    $row = mysqli_fetch_assoc($retval);
-    if ($row['id']=="") {
-      $query = "SELECT * FROM hospital WHERE id=$hospitalid";
-      $retval=mysqli_query($connect,$query);
-      $row = mysqli_fetch_assoc($retval);
-      if ($row['id']!="") {
-        $query = "INSERT into doctor(docname,password,hospitalid,specialization) values('$name','$password',$hospitalid,'$specialization')";
-        $retval=mysqli_query($connect,$query);
-        echo "<script>alert('Registered');</script>";
-      }
-      else {
-        echo "<script>alert('Not Registered Hospital');</script>";
-      }
-    }
-    else {
-      echo "<script>alert('Not Registered');</script>";
-    }
-  }
-if (isset($_POST['login'])) {
-
-    function validatenumber($string) {
-       return preg_replace('/[^0-9]/', '', $string);
-    }
-
-    function validate($string) {
-       return preg_replace('/[^A-Z@ a-z0-9\- .]/', '', $string);
-    }
-    $name= validate($_POST['name']);
-    $password= md5($_POST['password']);
-    $hospitalid=validatenumber($_POST['hospitalid']);
-    $query = "SELECT * FROM doctor WHERE docname = '$name' AND hospitalid= $hospitalid";
-    $retval=mysqli_query($connect,$query);
-    $row = mysqli_fetch_assoc($retval);
-    if($row['password'] == $password){
-      $_SESSION['docid'] = $row['id'];
-      header('location:doctorPortalView.php?portalFn=1');
-    }else {
-      echo "<script>alert('Wrong Username or Password')</script>";
-    }
-  }
- ?>

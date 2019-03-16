@@ -72,13 +72,13 @@
     			<div class="col-md-6 py-5 pr-md-5">
 	          <div class="heading-section heading-section-white ftco-animate mb-5">
 	          	<span class="subheading">Register</span>
-	            <h2 class="mb-4">Register your Hospital</h2>
-	            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+	            <h2 class="mb-4">Register your Lab</h2>
+	            <p>Enter the lab details</p>
 	          </div>
-	          <form action="hospitallogin.php" method="post" enctype="multipart/form-data" class="appointment-form ftco-animate">
+	          <form action="labLogin.php" method="post" enctype="multipart/form-data" class="appointment-form ftco-animate">
 	    				<div >
 		    				<div class="form-group">
-		    					<input type="text" class="form-control" name="reghospital" placeholder="Hospital Name">
+		    					<input type="text" class="form-control" name="reghospital" placeholder="Lab Name">
 		    				</div>
 		    				<div class="form-group">
 		    					<input type="text" class="form-control" placeholder="City" name="regcity">
@@ -93,6 +93,9 @@
 		    				</div>
 	    				</div>
               <div class="form-group">
+                <input type="text" class="form-control" name="reghos" placeholder="Hospitalid(if necessary)">
+              </div>
+              <div class="form-group">
                 <input type="password" class="form-control" name="regpassword" placeholder="Password">
               </div>
 	    				<div class="d-md-flex">
@@ -105,13 +108,13 @@
           <div class="col-md-6 py-5 pr-md-5">
 	          <div class="heading-section heading-section-white ftco-animate mb-5">
 	          	<span class="subheading">Login</span>
-	            <h2 class="mb-4">Login to Hospital</h2>
-	            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+	            <h2 class="mb-4">Login to Lab</h2>
+	            <p>Already registered, then login to continue</p>
 	          </div>
-	          <form action="hospitallogin.php" method="post" enctype="multipart/form-data" class="appointment-form ftco-animate">
+	          <form action="labLogin.php" method="post" enctype="multipart/form-data" class="appointment-form ftco-animate">
 	    				<div>
 		    				<div class="form-group">
-		    					<input type="text" class="form-control" name="hospital" placeholder="Hospital Name/Hospital ID">
+		    					<input type="text" class="form-control" name="hospital" placeholder="Lab Name">
 		    				</div>
 		    				<div class="form-group">
 		    					<input type="password" class="form-control" name="password" placeholder="Password">
@@ -199,16 +202,31 @@ if (isset($_POST['register'])) {
     $regcity=validate($_POST['regcity']);
     $regstate=validate($_POST['regstate']);
     $regnumber=validatenumber($_POST['regphone']);
-    $query = "SELECT * FROM hospital WHERE name = '$name'";
+    $reghos=validatenumber($_POST['reghos']);
+    if ($reghos == "" || $reghos == 0 ) {
+      $reghos = 0;
+    }
+    $query = "SELECT * FROM lab WHERE name = '$name'";
     $retval=mysqli_query($connect,$query);
     $row = mysqli_fetch_assoc($retval);
+    if ($name == "" || $password == "" || $regcity=="" || $regstate=="" || $regnumber=="") {
+      // code...
+      echo "<script>alert('Fields required..');</script>";
+      die();
+
+    }
     if ($row['id']=="") {
-        $query = "INSERT into hospital(name,password,city,state,phone) values('$name','$password','$regcity','$regstate','$regnumber')";
+        $query = "INSERT into lab(name,password,city,state,phone,hospid) values('$name','$password','$regcity','$regstate','$regnumber',$reghos)";
         $retval=mysqli_query($connect,$query);
-        echo "<script>alert('Hospital Registered');</script>";
+        if (!$retval) {
+          // code...
+          echo "<script>alert('not Registered');</script>";
+        }
+        else
+          echo "<script>alert('Lab Registered');</script>";
     }
     else {
-      echo "<script>alert('Already Registered Hospital');</script>";
+      echo "<script>alert('Already Registered Lab');</script>";
     }
   }
 if (isset($_POST['login'])) {
@@ -222,14 +240,15 @@ if (isset($_POST['login'])) {
     }
     $name= validate($_POST['hospital']);
     $password= md5($_POST['password']);
-    $query = "SELECT * FROM hospital WHERE name = '$name'";
+    $query = "SELECT * FROM lab WHERE name = '$name'";
     $retval=mysqli_query($connect,$query);
     $row = mysqli_fetch_assoc($retval);
     if($row['password'] == $password){
       echo "<script>alert('Logined')</script>";
       $id=$row['id'];
-      $_SESSION['hosid']=$id;
-      header('location:hospitalPortalView.php');
+      $_SESSION['hosp']=$name;
+      $_SESSION['pass']=$_POST['password'];
+      header('location:labPortal.php');
     }else {
       echo "<script>alert('Wrong Username or Password')</script>";
     }

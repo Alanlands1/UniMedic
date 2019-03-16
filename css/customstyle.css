@@ -36,6 +36,7 @@ Custom Styles
     margin: 5px;
     border-radius: 15px;
     padding: 8px;
+    padding-left: 25px;
 }
 .backblue
 {
@@ -107,11 +108,15 @@ Custom Styles
 }
 .block
 {
-  display: block;
+  display: inline-block;
+}
+.prevH:nth-child(1)
+{
+  margin-top: 50px;
 }
 .prevH
 {
-    word-break: break-all;
+    display: inline;
 }
 .prevH label
 {
@@ -119,5 +124,57 @@ Custom Styles
   text-decoration: underline;
   font-weight: 600;
 }
+.titlePH
+{
+  color: #dd6436;
+  text-decoration: underline;
+  font-weight: 600;
+}
+.prevH .title span
+{
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+}
+.prehDiv
+{
+  width: 100%;
+ display: block;
+ margin-top: 80px;
+}
+.wordBreak
+{
+  word-break: break-all;
+}
+.show
+{
+  display: none !important;
+}
+.info_p
+{
+  color: #2f89fc;
 
+}
+.info_p span
+{
+  color: #dd6436;
+}
+.prevHlist
+{
+  display: block;
+}
+.prevHlist li a
+{
+  color: white !important;
+}
+.prevHlist ul li{
+    background-color: #dd6436 !important;
+
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: block;
+  width: auto;
+  float: left;
+}
 /* End Custom Styles*/

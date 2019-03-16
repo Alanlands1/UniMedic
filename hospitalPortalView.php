@@ -53,7 +53,7 @@ if ($_SESSION['hosid']=="") {
 	        	<li class="nav-item navEffects"><a href="hospitalPortalView.php?portalFn=1" class="nav-link">Add Patient</a></li>
 	        	<li class="nav-item navEffects"><a href="hospitalPortalView.php?portalFn=2" class="nav-link">Add Appointment</a></li>
 	        	<li class="nav-item navEffects"><a href="hospitalPortalView.php?portalFn=3" class="nav-link">Add Surgery Details</a></li>
-	        	<li class="nav-item navEffects"><a href="hospitalPortalView.php?portalFn=4" class="nav-link">Edit Hospital Details</a></li>
+	        	<li class="nav-item navEffects"><a href="hospitalPortalView.php?portalFn=4" class="nav-link">Search for ID</a></li>
 	        	<li class="nav-item navEffects"><a href="hospitalPortalView.php?portalFn=5" class="nav-link">Register New Patient</a></li>
 	        </ul>
 	      </div>
@@ -165,6 +165,7 @@ if ($_SESSION['hosid']=="") {
               $timeSch = validate($_POST['timeSch']);
               $query = "SELECT * FROM doctor WHERE id = $doctorId";
               $retval=mysqli_query($connect,$query);
+
               $rows = mysqli_fetch_assoc($retval);
               if ($rows['id']!="") {
                 $query = "SELECT * FROM profile WHERE id = $patientId";
@@ -177,7 +178,11 @@ if ($_SESSION['hosid']=="") {
                   if ($row['id']!="") {
                     $query = "INSERT into appointments(phid,docid,times) values($patientId,$doctorId,'$timeSch')";
                     $retval=mysqli_query($connect,$query);
+
                     echo "<script>alert('Appointment Registered');</script>";
+                  }
+                  else {
+                    echo "<script>alert('Not Registered in this hospital Patient');</script>";
                   }
                 }
                 else {
@@ -288,6 +293,48 @@ if ($_SESSION['hosid']=="") {
             {
 
            ?>
+           <div class="container">
+             <div class="row">
+               <div class="col-lg-4">
+
+               </div>
+               <div class="col-lg-4">
+                 <div class="form no-gutters d-flex align-items-start align-items-center">
+                   <form class="" action="hospitalPortalView.php?portalFn=4" method="post">
+                     <br/>
+                     <div class="heading-section">
+                       <h2 class="">Search Hospital</h2>
+                     </div>
+                     <div class="form-group py-5">
+                         <input type="number" name="portalFn" value="3" style="display:none;">
+                         <input class="form-control mb-4 box_style1" type="number" name="phonenumber" placeholder="Patient's Phone number">
+                         <input class="form-control btn_style1" type="submit" name="check" value="Check">
+                         <?php
+                               if(isset($_POST["check"]))
+                               {
+                                 $phone = $_POST['phonenumber'];
+                                 $query = "SELECT * from profile where phone = $phone";
+                                 $retval=mysqli_query($connect,$query);
+                                 $row = mysqli_fetch_assoc($retval);
+                                 if ($row['id']!="") {
+                                   $idd=$row['id'];
+                                   echo "<script>alert('User Id is $idd')</script>";
+                                 }
+                                 else{
+
+                                 }
+                               }
+                         ?>
+                     </div>
+                   </form>
+
+                 </div>
+               </div>
+               <div class="col-lg-4">
+               </div>
+
+             </div>
+           </div>
 
 
           <?php
@@ -356,7 +403,7 @@ if ($_SESSION['hosid']=="") {
       function validate($string) {
          return preg_replace('/[^A-Z@ a-z0-9+\- .]/', '', $string);
       }
-      $hospitalid = $_SESSION['id'];
+      $hospitalid = $_SESSION['hosid'];
       $pName = validate($_POST['pName']);
       $pAddr = validate($_POST['pAddr']);
       $pPhone = validatenumber($_POST['pPhone']);
@@ -375,9 +422,9 @@ if ($_SESSION['hosid']=="") {
           $retval=mysqli_query($connect,$query);
           $row = mysqli_fetch_assoc($retval);
           $phid=$row['id'];
-          $query = "INSERT into hospatmap(phid,hospid) values($phid,$hospitalid)";
+          $query = "INSERT into hospatmap (phid,hospid) values ($phid,$hospitalid)";
           $retval=mysqli_query($connect,$query);
-          echo "<script>alert('$pDOB');</script>";
+          echo "<script>alert('Registered and patientId is $phid');</script>";
       }
       else {
         echo "<script>alert('Already Registered Patient');</script>";
