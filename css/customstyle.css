@@ -19,11 +19,23 @@ Custom Styles
   background-color: #2f89fc;
   border-color: #2f89fc;
 }
+.navlogo
+{
+  width: 60px;
+  height: 60px;
+}
+
+.slideLogo
+{
+  width: 60% !important;
+  height: auto;
+}
 .transBack
 {
     background-color: rgba(0, 0, 0, 0.1);
     margin: 5px;
     border-radius: 15px;
+    padding: 8px;
 }
 .backblue
 {
@@ -45,7 +57,7 @@ Custom Styles
 }
 .box_style1:focus
 {
-  border-radius: 50px;
+  border-radius: 15px;
   border-width: 3px;
   border-color: #2f89fc !important;
   transition-timing-function: ease-in;
@@ -57,17 +69,20 @@ Custom Styles
 }
 .cusTable
 {
-  width: 100%;
+  width: 100% !important;
   text-align: center;
 
 }
 .cusTable td
 {
+  width: 50% !important;
   padding-top:8px;
   padding-bottom: 8px;
+  padding-right: 15px;
 }
 .cusTable th
 {
+
   background-color: #2f89fc;
   color: white;
   padding-top:8px;
@@ -86,4 +101,23 @@ Custom Styles
   color: black;
 
 }
+.txtBlue
+{
+  color:  #2f89fc !important;
+}
+.block
+{
+  display: block;
+}
+.prevH
+{
+    word-break: break-all;
+}
+.prevH label
+{
+  color: #dd6436;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
 /* End Custom Styles*/
