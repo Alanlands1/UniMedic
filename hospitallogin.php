@@ -43,10 +43,11 @@
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
 	      <div class="collapse navbar-collapse" id="ftco-nav">
-	        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active navEffects"><a href="index.html" class="nav-link pl-0">Home</a></li>
+          <ul class="navbar-nav mr-auto">
+	        	<li class="nav-item active navEffects"><a href="index.html" class="nav-link pl-0">Home</a></li>
 	        	<li class="nav-item navEffects"><a href="doctorlogin.php" class="nav-link">Doctor Portal</a></li>
 	        	<li class="nav-item navEffects"><a href="hospitallogin.php" class="nav-link">Hospital Portal</a></li>
+	        	<li class="nav-item navEffects"><a href="labPortal.php" class="nav-link">Lab Portal</a></li>
 	          <li class="nav-item navEffects"><a href="About.html" class="nav-link">About</a></li>
 	        </ul>
 	      </div>
