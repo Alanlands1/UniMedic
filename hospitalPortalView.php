@@ -44,6 +44,7 @@ if ($_SESSION['hosid']=="") {
 		  </div>
     </nav>
 	  <nav class="navbar navbar-expand-lg navbar-dark bg-dark ftco-navbar-light" id="ftco-navbar">
+
 	    <div class="container d-flex align-items-center">
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
@@ -56,6 +57,14 @@ if ($_SESSION['hosid']=="") {
 	        	<li class="nav-item navEffects"><a href="hospitalPortalView.php?portalFn=4" class="nav-link">Search for ID</a></li>
 	        	<li class="nav-item navEffects"><a href="hospitalPortalView.php?portalFn=5" class="nav-link">Register New Patient</a></li>
 	        </ul>
+          <?php
+                $pHospID = "Not Known";
+                if(isset($_SESSION['hosid']))
+                {
+                  $pHospID = $_SESSION['hosid'];
+                }
+                echo '<p class="info_p">Hospital ID <span> '.$pHospID.'</span></p>';
+            ?>
 	      </div>
 	    </div>
 	  </nav>

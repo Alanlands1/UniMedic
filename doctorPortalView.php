@@ -152,7 +152,7 @@ session_start();
                     else {
                     //  header("location:index.html");
                     }
-                      $sql = "select * from appointments, profile where appointments.docid=$docId and profile.id=appointments.phid";
+                      $sql = "select * from appointments, profile where appointments.docid=$docId and profile.id=appointments.phid and appointments.status=0";
                       $result = mysqli_query($connect,$sql);
 
                       if (mysqli_num_rows($result) > 0)
@@ -540,6 +540,11 @@ session_start();
                                       echo $query;
                                       $retval=mysqli_query($connect,$query);
                                   }
+
+                                  $query = "UPDATE appointments set status=1 where phid=$pID and docid=$docId";
+                                  $retval=mysqli_query($connect,$query);
+                                  header("location:doctorPortalView.php?portalFn=1");
+                                  //$_SESSION["pId"]="";
                                 }
                           ?>
                       </div>
